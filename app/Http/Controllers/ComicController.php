@@ -21,7 +21,7 @@ class ComicController extends Controller
 
     //qui chiamo la cartella comic che contiene (index ecc) e grazie a questo commando insieme alle rotte
     //che riuscirò a vedere qello che sta nel file index nella cartella comic in pagina.
-    return view("comic/index", compact("comics")); 
+    return view("comics/index", compact("comics")); 
 
 }
 
@@ -30,7 +30,7 @@ class ComicController extends Controller
      */
     public function create()
     {
-        return view("comic/create");
+        return view("comics/create");
     }
 
     /**
@@ -78,7 +78,7 @@ class ComicController extends Controller
         $comic = Comic::find($id);
         //dd($comic);
 
-        return view("comic/show",compact("comic"));
+        return view("comics/show",compact("comic"));
      }
 
     /**
