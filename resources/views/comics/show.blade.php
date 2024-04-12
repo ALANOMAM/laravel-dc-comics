@@ -10,11 +10,24 @@
    <!--pulsante di modifica-->
    <div class="py-5">
     <a href="{{route('comics.edit', $comic->id)}}" class="btn btn-warning">Modifica</a>
+     
 
-     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Elimina
-    </button>
-</div>
+    <!--il moi pulsante per l'eliminazione deve essere dentro un mini form-->
+<form action="{{route('comics.destroy', $comic->id)}}" method="POST">
+  <!--serve questo commando -->
+  @csrf
+  <!--serve questo commando -->
+  @method("DELETE")
+
+  <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> Elimina</button>
+
+ </form>
+
+  </div>
+
+
+
+
 
 
   </div>
