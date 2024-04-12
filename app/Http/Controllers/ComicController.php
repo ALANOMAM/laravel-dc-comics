@@ -142,6 +142,18 @@ class ComicController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        //codice per modificare il comic dopo che abbiamo ricevuto i dati dal form legato a "edit" sopra
+
+
+         //variabile creata sul momento, non centra on gli altri comic
+        //salvare i dati nella variabile
+        $comic = Comic::find($id);
+        //dd($comic);
+
+
+        $comic->delete();
+
+        return redirect()->route("comics.index", $comic->id);
     }
 }
