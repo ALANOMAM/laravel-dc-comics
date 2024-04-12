@@ -58,10 +58,11 @@ class ComicController extends Controller
 
         $newComicElement->save();
 
-       //se dopo avere salvato il nuovo elemento vogliamo ridirezionarci all'index
+       //se dopo avere salvato il nuovo elemento vogliamo ridirezionarci nel show facendo vedere direttamente 
+       //l'elemento aggiunto(per questo abbiamo il secondo parametro "$newComicElement->id")
        //senza quello, dopo che slavo il nuovo elemento mi rimarrà una pagina bianca
        //si aggiorna lo stesso il database ma è più carino cambiare pagina una volta inviato tutto
-        return redirect()->route("comics.index", $newComicElement->id);
+        return redirect()->route("comics.show", $newComicElement->id);
     }
 
     /**
@@ -102,8 +103,39 @@ class ComicController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //codice per modificare il comic dopo che abbiamo ricevuto i dati dal form legato a "edit" sopra
+
+        // dd($request);
+        // qui facciamo una specie di seeder usando la variabile 
+        //"request" che ha tutte le info sul mio nuovo comic e lo paragona a quelli del vecchio
+        //per fare le opurtune modifiche 
+        $newComicElement2 = Comic::find($id);
+
+         
+        $newComicElement2->title = $request['title'];  //o " $newComicElement2->title = $request->title; "
+        $newComicElement2->description = $request['description'];
+        $newComicElement2->thumb = $request['thumb'];
+        $newComicElement2->price = $request['price'];
+        $newComicElement2->series = $request['series'];
+        $newComicElement2->sale_date = $request['sell'];
+        $newComicElement2->type = $request['type'];
+        $newComicElement2->artists = $request['artists'];
+        $newComicElement2->writers = $request['writers'];
+
+        $newComicElement2->save();
+
+         //dd($newComicElement2 );
+
+       //se dopo avere salvato il nuovo elemento vogliamo ridirezionarci nel show facendo vedere direttamente 
+       //l'elemento aggiunto(per questo abbiamo il secondo parametro "$newComicElement2->id")
+       //senza quello, dopo che slavo il nuovo elemento mi rimarrà una pagina bianca
+       //si aggiorna lo stesso il database ma è più carino cambiare pagina una volta inviato tutto
+        return redirect()->route("comics.show", $newComicElement2->id);
     }
+
+
+
+    
 
     /**
      * Remove the specified resource from storage.

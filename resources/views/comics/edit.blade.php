@@ -5,15 +5,18 @@
     <h1>PAGINA EDIT COMIC</h1>
      
     <!--ci restituisce il comic che abbiamo passato dal controller resources sezione edit-->
-    @dump($comic)
+     {{-- @dump($comic) --}}
     
     
-       <!--inseriamo il nome della rotta verso "store"(presente nel ComicController insiem a "create" ecc) 
-        che memorizza il dato creato dentro la variabile "request". La rotta si è trovata gurdando il terminale-->
+       <!--inseriamo il nome della rotta verso "update"(presente nel ComicController insiem a "create" ecc) 
+        ed è li che avverà la modifica, quetso form riceve e manda solo le info. La rotta si è trovata gurdando il terminale-->
 
         <!--indichiamo anche il metodo POST per la richesta-->
-        <form action="{{ route('comics.store')}}" method="POST" >
+        <form action="{{ route('comics.update', $comic->id)}}" method="POST" >
+
               @csrf
+              {{--ci serve il mommando @method("PUT")--}}
+              @method("PUT")
 
             <div class="mb-3">
               <label for="title" class="form-label">Titolo Comic</label>
