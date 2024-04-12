@@ -12,7 +12,9 @@ class ComicController extends Controller
      */
     public function index()
     {
-        //
+        
+        //variabile creata li
+        //salvare i dati nella variabile 
           $comics = Comic::all();
     //quetso sotto per fare un console log dei 12 elementi, serve avere sistemato la rotta però verso la funzione index
     //dd($comics);
@@ -43,9 +45,19 @@ class ComicController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
+     //per accedere alle pagine che mostrano queste pagine variabili secondo gli id
+     //basta digitare il commando che fa vedere le rotte nel terminale e cercare "show"
+     //per capire l'url adeguato..nel nostro caso è "comics/{indice}" al cambiare dell'indice
+     //cambi pagina 
     {
-        //
-    }
+        
+        //variabile creata li
+        //salvare i dati nella variabile
+        $comic = Comic::find($id);
+        //dd($comic);
+
+        return view("comic/show",compact("comic"));
+     }
 
     /**
      * Show the form for editing the specified resource.
