@@ -7,8 +7,12 @@
      
     <!--inserirò i dati che mi servono per creare un nuovo comic-->
     
+       <!--inseriamo il nome della rotta verso "store"(presente nel ComicController insiem a "create" ecc) 
+        che memorizza il dato creato dentro la variabile "request". La rotta si è trovata gurdando il terminale-->
 
-        <form action="">
+        <!--indichiamo anche il metodo POST per la richesta-->
+        <form action="{{ route('comics.store')}}" method="POST" >
+              @csrf
 
             <div class="mb-3">
               <label for="title" class="form-label">Titolo Comic</label>
@@ -50,12 +54,12 @@
 
               <div class="mb-3">
                 <label for="artists" class="form-label">Artisti del Comic</label>
-                <input type="text" class="form-control" id="artists" name="artists">
+                <input type="string" class="form-control" id="artists" name="artists">
               </div>
 
               <div class="mb-3">
                 <label for="writers" class="form-label">Scrittori del Comic</label>
-                <input type="text" class="form-control" id="writers" name="writers">
+                <input type="string" class="form-control" id="writers" name="writers">
               </div>
 
               

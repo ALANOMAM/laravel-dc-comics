@@ -38,7 +38,24 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        // qui facciamo una specie di seeder usando la variabile 
+        //"request" che ha tutte le info sul mio nuovo comic e filtrando ogi info
+        //per passarlo alla tabella.
+        $newComicElement = new Comic();
+
+         
+        $newComicElement->title = $request['title'];  //o " $newComicElement->title = $request->title; "
+        $newComicElement->description = $request['description'];
+        $newComicElement->thumb = $request['thumb'];
+        $newComicElement->price = $request['price'];
+        $newComicElement->series = $request['series'];
+        $newComicElement->sale_date = $request['sell'];
+        $newComicElement->type = $request['type'];
+        $newComicElement->artists = $request['artists'];
+        $newComicElement->writers = $request['writers'];
+
+        $newComicElement->save();
     }
 
     /**
