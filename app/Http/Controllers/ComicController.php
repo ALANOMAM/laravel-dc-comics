@@ -13,8 +13,9 @@ class ComicController extends Controller
     public function index()
     {
         
-        //variabile creata li
+        //variabile creata sul momento, non centra on gli altri comic
         //salvare i dati nella variabile 
+        //Comic è il nome del mondello
           $comics = Comic::all();
     //quetso sotto per fare un console log dei 12 elementi, serve avere sistemato la rotta però verso la funzione index
     //dd($comics);
@@ -73,7 +74,7 @@ class ComicController extends Controller
      //cambi pagina 
     {
         
-        //variabile creata li
+        //variabile creata sul momento, non centra on gli altri comic
         //salvare i dati nella variabile
         $comic = Comic::find($id);
         //dd($comic);
@@ -86,7 +87,14 @@ class ComicController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        //variabile creata sul momento, non centra on gli altri comic
+       $comic = Comic::find($id);
+
+       //andando in url "/comics/2/edit" vedrò ill dd sotto per il comic 2 ecc
+        //dd($comic);
+
+        return view("comics/edit", compact("comic"));
+
     }
 
     /**
