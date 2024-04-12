@@ -1,7 +1,8 @@
 @extends("layouts/app")
 
 @section("content")
-  <div class="container py-5">
+  <div class="container py-5 mb-5">
+    <h1>PAGINA INDEX</h1>
    <h2>lista dei comics</h2>
 
    @dump($comics)
@@ -20,12 +21,16 @@
         @foreach ($comics as $comic)
         <tr>
         <td>{{$comic->title}}</td>
-        <td><a href="#">visualizza comic</a></td>
+        <!--è in questo punto che collego il file index col file show tramite link-->
+        <!--la rotta giù me la ricavo cercando sul terminale, e mi da appunto "comics.show"-->
+        <td><a href="{{route('comics.show' , $comic->id )}}">visualizza comic</a></td>
        </tr>
         @endforeach
         
     </tbody>
   </table>
 
+
+  <a href="#" class="btn btn-primary">Aggiungi comic</a>
   </div>
 @endsection
