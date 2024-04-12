@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comic;
 use Illuminate\Http\Request;
 
 class ComicController extends Controller
@@ -12,7 +13,15 @@ class ComicController extends Controller
     public function index()
     {
         //
-    }
+          $comics = Comic::all();
+    //quetso sotto per fare un console log dei 12 elementi, serve avere sistemato la rotta però verso la funzione index
+    //dd($comics);
+
+    //qui chiamo la cartella comic che contiene (index ecc) e grazie a questo commando insieme alle rotte
+    //che riuscirò a vedere qello che sta nel file index nella cartella comic in pagina.
+    return view("comic/index", compact("comics")); 
+
+}
 
     /**
      * Show the form for creating a new resource.

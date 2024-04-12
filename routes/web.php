@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComicController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+//modo tradizionale in cui avrei gestito le rotte  se i controllers non fossero tìdi tipo resources
+//avrei dovuto farne una per ogni url o pagina
+//Route::get('/',  [ComicController::class, "index"])->name("home");
 
-    return view('home');
-})->name("home");
+//questo è come si gestiscono le rotte quando usiamo i controllers tipo "resources"
+// questo ci crea tutte le rotte(create, store, show, update,delete) in modo automatico
+//perchè è compreso nel pachetto.
+Route::resource('comics',ComicController::class);
