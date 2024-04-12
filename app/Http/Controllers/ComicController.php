@@ -56,6 +56,11 @@ class ComicController extends Controller
         $newComicElement->writers = $request['writers'];
 
         $newComicElement->save();
+
+       //se dopo avere salvato il nuovo elemento vogliamo ridirezionarci all'index
+       //senza quello, dopo che slavo il nuovo elemento mi rimarrà una pagina bianca
+       //si aggiorna lo stesso il database ma è più carino cambiare pagina una volta inviato tutto
+        return redirect()->route("comics.index", $newComicElement->id);
     }
 
     /**
