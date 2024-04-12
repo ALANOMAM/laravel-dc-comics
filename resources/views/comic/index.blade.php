@@ -21,7 +21,7 @@
         @foreach ($comics as $comic)
         <tr>
         <td>{{$comic->title}}</td>
-        <!--è in questo punto che collego il file index col file show tramite link-->
+        <!--è in questo punto che collego il file/vista "index" col file show tramite link-->
         <!--la rotta giù me la ricavo cercando sul terminale, e mi da appunto "comics.show"-->
         <td><a href="{{route('comics.show' , $comic->id )}}">visualizza comic</a></td>
        </tr>
@@ -30,7 +30,8 @@
     </tbody>
   </table>
 
-
-  <a href="#" class="btn btn-primary">Aggiungi comic</a>
+  <!--è in questo punto che collego il file index col file/vista "create" tramite link-->
+<!--la rotta giù me la ricavo cercando sul terminale, e mi da appunto "comics.create"-->
+  <a href="{{route('comics.create')}}" class="btn btn-primary">Aggiungi comic</a>
   </div>
 @endsection
