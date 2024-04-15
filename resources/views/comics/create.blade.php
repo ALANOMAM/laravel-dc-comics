@@ -64,9 +64,9 @@
               </div>
 
               <div class="mb-3">
-                <label for="sell" class="form-label">Data Vendita Comic</label>
-                <input type="date" class="form-control @error('sell') is-invalid @enderror" id="sell" name="sell" value="{{old('sell')}}">
-                @error('sell') 
+                <label for="sale_date" class="form-label">Data Vendita Comic</label>
+                <input type="date" class="form-control @error('sale_date') is-invalid @enderror" id="sale_date" name="sale_date" value="{{old('sale_date')}}">
+                @error('sale_date') 
                 <div class="invalid-feedback">
                  {{$message}} 
                 </div>

@@ -54,7 +54,7 @@ class ComicController extends Controller
         $newComicElement->thumb = $request['thumb'];
         $newComicElement->price = $request['price'];
         $newComicElement->series = $request['series'];
-        $newComicElement->sale_date = $request['sell'];
+        $newComicElement->sale_date = $request['sale_date']; /*qui c'era sell*/
         $newComicElement->type = $request['type'];
         $newComicElement->artists = $request['artists'];
         $newComicElement->writers = $request['writers'];
@@ -121,7 +121,7 @@ class ComicController extends Controller
         $newComicElement2->thumb = $request['thumb'];
         $newComicElement2->price = $request['price'];
         $newComicElement2->series = $request['series'];
-        $newComicElement2->sale_date = $request['sell'];
+        $newComicElement2->sale_date = $request['sale_date'];
         $newComicElement2->type = $request['type'];
         $newComicElement2->artists = $request['artists'];
         $newComicElement2->writers = $request['writers'];
@@ -173,9 +173,22 @@ private function validation($data) {
                 'price' =>'required',
                 'series' => 'required',
                 'sale_date' => 'required',
-                'type' => 'required',
+                'type' => 'required|max:100',
                 'artists' => 'required',
                 'writers' => 'required',  
+    ],
+    [   //array che si occupa della traduzione degli errori, senza quello avrò errori solo in inglese.
+        'title.required' => 'Il titolo deve essere inserito',
+        'title.max' => "Il titolo deve avere massimo :max caratteri",
+        'price.required' => 'Il prezzo deve essere inserito',
+        'series.required' => 'La serie deve essere inserita',
+        'sale_date.required' => 'La data di vendita deve essere inserita',
+        'type.max' => "La tipologia deve avere massimo :max caratteri",
+        'type.required' => 'La tipologia deve essere inserita',
+        'artists.required' => 'Gli artisti devono essere inseriti',
+        'writers.required' => 'Gli scrittori  devono essere inseriti',
+        // 'max' => "Il campo :attribute deve avere massimo :max caratteri", // possiamo creare messaggi generali per regole condivise tra più campi
+        // 'required' => "Il campo :attribute deve avere inserito", // possiamo creare messaggi generali per regole condivise tra più campi
     ])->validate();
      // tramite il metodo validate() controlliamo delle regole scelte da noi per i vari campi che riceviamo dal form
         // in caso le validazioni non vadano a buon fine (ne basta una sbagliata), laravel in automatico farà tornare l'utente indietro
