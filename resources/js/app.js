@@ -7,4 +7,4 @@ import '~resources/scss/app.scss'
 //precompilazione immagini
 import.meta.glob([
     '../img/**'
-    ])
+    ]) 

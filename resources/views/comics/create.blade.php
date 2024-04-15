@@ -5,12 +5,7 @@
   <div class="container py-5">
     <h1>PAGINA CREAZIONE NUOVO COMIC</h1>
      
-    <!--inserirò i dati che mi servono per creare un nuovo comic-->
-    
-       <!--inseriamo il nome della rotta verso "store"(presente nel ComicController insiem a "create" ecc) 
-        che memorizza il dato creato dentro la variabile "request". La rotta si è trovata gurdando il terminale-->
-
-        <!--indichiamo anche il metodo POST per la richesta-->
+  
         <form action="{{ route('comics.store')}}" method="POST" >
               @csrf
 
@@ -61,8 +56,20 @@
                 <label for="writers" class="form-label">Scrittori del Comic</label>
                 <input type="string" class="form-control" id="writers" name="writers">
               </div>
-
-              
+             
+              {{--metodo per inserire la lista di tutti gli erroro della nostra form create, 
+                ovvero quelli che non superano la validazione impostata gia nel file controlli e sezione store
+                non è tanto best practice in quanto di solito gli erori vengono inseriti sotto ogni input e non
+                tutti alla fine ma può sevire--}}
+              @if($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach($errors->all() as $error)
+                      <li>{{$error}}</li>
+                      @endforeach
+                  </ul>
+              </div>
+              @endif
            
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>

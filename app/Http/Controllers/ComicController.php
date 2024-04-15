@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comic;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ComicController extends Controller
 {
@@ -38,15 +40,16 @@ class ComicController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+
+    {    //Richiamiamo la funzione creata in fondo alla pagina che contiene le regole di validazioni
+        //richiamando qui, lo vogliamo implementare allo store.
+         $this->validation($request->all());
+
         // dd($request);
-        // qui facciamo una specie di seeder usando la variabile 
-        //"request" che ha tutte le info sul mio nuovo comic e filtrando ogi info
-        //per passarlo alla tabella.
         $newComicElement = new Comic();
 
          
-        $newComicElement->title = $request['title'];  //o " $newComicElement->title = $request->title; "
+        $newComicElement->title = $request['title'];
         $newComicElement->description = $request['description'];
         $newComicElement->thumb = $request['thumb'];
         $newComicElement->price = $request['price'];
@@ -58,10 +61,6 @@ class ComicController extends Controller
 
         $newComicElement->save();
 
-       //se dopo avere salvato il nuovo elemento vogliamo ridirezionarci nel show facendo vedere direttamente 
-       //l'elemento aggiunto(per questo abbiamo il secondo parametro "$newComicElement->id")
-       //senza quello, dopo che slavo il nuovo elemento mi rimarrà una pagina bianca
-       //si aggiorna lo stesso il database ma è più carino cambiare pagina una volta inviato tutto
         return redirect()->route("comics.show", $newComicElement->id);
     }
 
@@ -88,7 +87,6 @@ class ComicController extends Controller
      */
     public function edit(string $id)
     {
-        //variabile creata sul momento, non centra on gli altri comic
        $comic = Comic::find($id);
 
        //andando in url "/comics/2/edit" vedrò ill dd sotto per il comic 2 ecc
@@ -102,7 +100,13 @@ class ComicController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
+
     {
+       //Anche qui richiamiamo la funzione creata in fondo alla pagina che contiene le regole di validazioni
+        //richiamando qui, lo vogliamo implementare a update.
+        $this->validation($request->all());
+
+
         //codice per modificare il comic dopo che abbiamo ricevuto i dati dal form legato a "edit" sopra
 
         // dd($request);
@@ -126,10 +130,6 @@ class ComicController extends Controller
 
          //dd($newComicElement2 );
 
-       //se dopo avere salvato il nuovo elemento vogliamo ridirezionarci nel show facendo vedere direttamente 
-       //l'elemento aggiunto(per questo abbiamo il secondo parametro "$newComicElement2->id")
-       //senza quello, dopo che slavo il nuovo elemento mi rimarrà una pagina bianca
-       //si aggiorna lo stesso il database ma è più carino cambiare pagina una volta inviato tutto
         return redirect()->route("comics.show", $newComicElement2->id);
     }
 
@@ -156,4 +156,31 @@ class ComicController extends Controller
 
         return redirect()->route("comics.index", $comic->id);
     }
+
+
+//-------------------------------------------------------------------------
+//DOVE STA IL CERVELLO DELLE VALIDAZIONI
+// creiamo una funzione privata per i controlli di validazione e la comunicazione dei messaggi di errore
+// che poi richiameremo per il metodo store e il metodo update
+private function validation($data) {
+
+    // quando facciamo l'import della  classe "Validator"  dobbiamo fare attenzione
+    // ad importare quello presente in Support\Facades.
+    $validator = Validator ::make($data, [
+                'title'=>'required|max:100',
+                'description' => 'nullable',
+                'thumb' =>'nullable',
+                'price' =>'required',
+                'series' => 'required',
+                'sale_date' => 'required',
+                'type' => 'required',
+                'artists' => 'required',
+                'writers' => 'required',  
+    ])->validate();
+     // tramite il metodo validate() controlliamo delle regole scelte da noi per i vari campi che riceviamo dal form
+        // in caso le validazioni non vadano a buon fine (ne basta una sbagliata), laravel in automatico farà tornare l'utente indietro
+        // e fornirà alla pagina precedente le indicazioni sull'errore
+    }
+
 }
+
