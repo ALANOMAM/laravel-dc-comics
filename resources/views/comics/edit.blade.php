@@ -69,7 +69,22 @@
                 <input type="string" class="form-control" id="writers" name="writers" value="{{$comic->writers}}">
               </div>
 
-              
+               {{--metodo per inserire la lista di tutti gli erroro della nostra form create, 
+                ovvero quelli che non superano la validazione impostata gia nel file controlli e sezione store
+                non è tanto best practice in quanto di solito gli erori vengono inseriti sotto ogni input e non
+                tutti alla fine ma può sevire--}}
+                @if($errors->any())
+                {{--la variabile "$errors" è gia inclusa, non l'ho creata io --}}
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
+
            
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
