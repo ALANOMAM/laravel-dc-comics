@@ -23,7 +23,7 @@
                value="{{old('title')}}">
                {{--questo pezzo invece ci scive il messaggio dell'errore sotto il tag (anche qui "$message" non l'ho creato io )--}}
                @error('title') 
-               <div class="alert alert-danger">
+               <div class="invalid-feedback">
                 {{$message}} 
                </div>
                @enderror
@@ -47,7 +47,7 @@
                 <label for="price" class="form-label">Prezzo Comic</label>
                 <input type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{old('price')}}">
                 @error('price') 
-               <div class="alert alert-danger">
+               <div class="invalid-feedback">
                 {{$message}} 
                </div>
                @enderror
@@ -57,7 +57,7 @@
                 <label for="series" class="form-label">Serie Comic</label>
                 <input type="text" class="form-control @error('series') is-invalid @enderror" id="series" name="series" value="{{old('series')}}">
                 @error('series') 
-                <div class="alert alert-danger">
+                <div class="invalid-feedback">
                  {{$message}} 
                 </div>
                 @enderror
@@ -67,7 +67,7 @@
                 <label for="sell" class="form-label">Data Vendita Comic</label>
                 <input type="date" class="form-control @error('sell') is-invalid @enderror" id="sell" name="sell" value="{{old('sell')}}">
                 @error('sell') 
-                <div class="alert alert-danger">
+                <div class="invalid-feedback">
                  {{$message}} 
                 </div>
                 @enderror
@@ -77,7 +77,7 @@
                 <label for="type" class="form-label">Tipo Comic</label>
                 <input type="text" class="form-control @error('type') is-invalid @enderror" id="type" name="type" value="{{old('type')}}">
                 @error('type') 
-                <div class="alert alert-danger">
+                <div class="invalid-feedback">
                  {{$message}} 
                 </div>
                 @enderror
@@ -87,7 +87,7 @@
                 <label for="artists" class="form-label">Artisti del Comic</label>
                 <input type="string" class="form-control @error('artists') is-invalid @enderror" id="artists" name="artists" value="{{old('artists')}}">
                 @error('artists') 
-                <div class="alert alert-danger">
+                <div class="invalid-feedback">
                  {{$message}} 
                 </div>
                 @enderror
@@ -97,7 +97,7 @@
                 <label for="writers" class="form-label">Scrittori del Comic</label>
                 <input type="string" class="form-control @error('writers') is-invalid @enderror" id="writers" name="writers" value="{{old('writers')}}">
                 @error('writers') 
-                <div class="alert alert-danger">
+                <div class="invalid-feedback">
                  {{$message}} 
                 </div>
                 @enderror
