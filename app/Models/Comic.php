@@ -13,4 +13,7 @@ class Comic extends Model
 
     //pezzo aggiunto apposta per le soft deletes 
     use SoftDeletes;
+    
+    //pezzo aggiunto apposta per automatizzare
+    protected $fillable = [ 'title', 'description', 'thumb', 'price', 'series', 'sale_date','type','artists','writers'];
 }

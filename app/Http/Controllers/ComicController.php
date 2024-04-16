@@ -53,16 +53,18 @@ class ComicController extends Controller
         // dd($request);
         $newComicElement = new Comic();
 
-         
-        $newComicElement->title = $request['title'];
+        //metto questa riga al posto delle 9 righe sotto
+        $newComicElement->fill($request->all());
+
+       /* $newComicElement->title = $request['title'];
         $newComicElement->description = $request['description'];
         $newComicElement->thumb = $request['thumb'];
         $newComicElement->price = $request['price'];
         $newComicElement->series = $request['series'];
-        $newComicElement->sale_date = $request['sale_date']; /*qui c'era sell*/
+        $newComicElement->sale_date = $request['sale_date'];
         $newComicElement->type = $request['type'];
         $newComicElement->artists = $request['artists'];
-        $newComicElement->writers = $request['writers'];
+        $newComicElement->writers = $request['writers'];*/
 
         $newComicElement->save();
 
@@ -114,17 +116,13 @@ class ComicController extends Controller
         //come richiamo la funzione adesso
         $request->validated();
 
-
-        //codice per modificare il comic dopo che abbiamo ricevuto i dati dal form legato a "edit" sopra
-
-        // dd($request);
-        // qui facciamo una specie di seeder usando la variabile 
-        //"request" che ha tutte le info sul mio nuovo comic e lo paragona a quelli del vecchio
-        //per fare le opurtune modifiche 
+ 
         $newComicElement2 = Comic::find($id);
 
-         
-        $newComicElement2->title = $request['title'];  //o " $newComicElement2->title = $request->title; "
+        //metto questa righa al posto delle 9 righe sotto 
+        $newComicElement2->update($request->all());
+
+       /* $newComicElement2->title = $request['title']; 
         $newComicElement2->description = $request['description'];
         $newComicElement2->thumb = $request['thumb'];
         $newComicElement2->price = $request['price'];
@@ -132,7 +130,7 @@ class ComicController extends Controller
         $newComicElement2->sale_date = $request['sale_date'];
         $newComicElement2->type = $request['type'];
         $newComicElement2->artists = $request['artists'];
-        $newComicElement2->writers = $request['writers'];
+        $newComicElement2->writers = $request['writers'];*/
 
         $newComicElement2->save();
 
