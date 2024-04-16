@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreComicRequest;
 use App\Models\Comic;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
@@ -39,11 +40,15 @@ class ComicController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store( StoreComicRequest $request)
 
-    {    //Richiamiamo la funzione creata in fondo alla pagina che contiene le regole di validazioni
-        //richiamando qui, lo vogliamo implementare allo store.
-         $this->validation($request->all());
+    {    
+        //Come richiamavo la funzione delle validazioni quando erano in fondo alla pagina
+        // $this->validation($request->all());
+
+        //come richiamo la funzione adesso
+        $request->validated();
+
 
         // dd($request);
         $newComicElement = new Comic();
@@ -99,12 +104,15 @@ class ComicController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreComicRequest $request, string $id)
 
     {
-       //Anche qui richiamiamo la funzione creata in fondo alla pagina che contiene le regole di validazioni
-        //richiamando qui, lo vogliamo implementare a update.
-        $this->validation($request->all());
+       
+        //Come richiamavo la funzione delle validazioni quando erano in fondo alla pagina
+        // $this->validation($request->all());
+        
+        //come richiamo la funzione adesso
+        $request->validated();
 
 
         //codice per modificare il comic dopo che abbiamo ricevuto i dati dal form legato a "edit" sopra
@@ -159,41 +167,8 @@ class ComicController extends Controller
 
 
 //-------------------------------------------------------------------------
-//DOVE STA IL CERVELLO DELLE VALIDAZIONI
-// creiamo una funzione privata per i controlli di validazione e la comunicazione dei messaggi di errore
-// che poi richiameremo per il metodo store e il metodo update
-private function validation($data) {
+//DOVE STAVA IL CERVELLO DELLE VALIDAZIONI PRIMA DELL'OTTIMIZZAZIONE (OVVERO MESSO NEL FILE A SE)
 
-    // quando facciamo l'import della  classe "Validator"  dobbiamo fare attenzione
-    // ad importare quello presente in Support\Facades.
-    $validator = Validator ::make($data, [
-                'title'=>'required|max:100',
-                'description' => 'nullable',
-                'thumb' =>'nullable',
-                'price' =>'required',
-                'series' => 'required',
-                'sale_date' => 'required',
-                'type' => 'required|max:100',
-                'artists' => 'required',
-                'writers' => 'required',  
-    ],
-    [   //array che si occupa della traduzione degli errori, senza quello avrò errori solo in inglese.
-        'title.required' => 'Il titolo deve essere inserito',
-        'title.max' => "Il titolo deve avere massimo :max caratteri",
-        'price.required' => 'Il prezzo deve essere inserito',
-        'series.required' => 'La serie deve essere inserita',
-        'sale_date.required' => 'La data di vendita deve essere inserita',
-        'type.max' => "La tipologia deve avere massimo :max caratteri",
-        'type.required' => 'La tipologia deve essere inserita',
-        'artists.required' => 'Gli artisti devono essere inseriti',
-        'writers.required' => 'Gli scrittori  devono essere inseriti',
-        // 'max' => "Il campo :attribute deve avere massimo :max caratteri", // possiamo creare messaggi generali per regole condivise tra più campi
-        // 'required' => "Il campo :attribute deve avere inserito", // possiamo creare messaggi generali per regole condivise tra più campi
-    ])->validate();
-     // tramite il metodo validate() controlliamo delle regole scelte da noi per i vari campi che riceviamo dal form
-        // in caso le validazioni non vadano a buon fine (ne basta una sbagliata), laravel in automatico farà tornare l'utente indietro
-        // e fornirà alla pagina precedente le indicazioni sull'errore
-    }
 
 }
 
