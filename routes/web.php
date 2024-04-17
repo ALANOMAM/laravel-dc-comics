@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ComicController;
+use App\Http\Controllers\Guest\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,5 @@ use Illuminate\Support\Facades\Route;
 // questo ci crea tutte le rotte(create, store, show, update,delete) in modo automatico
 //perchè è compreso nel pachetto.
 Route::resource('comics',ComicController::class);
+
+Route::get("/", [PageController::class,'home'])->name('Home');
